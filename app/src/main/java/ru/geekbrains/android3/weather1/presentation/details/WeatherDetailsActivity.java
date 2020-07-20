@@ -15,9 +15,9 @@ import ru.geekbrains.android3.weather1.data.repository.WeatherRepositoryImpl;
 import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 
-import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_CITY_NAME;
-import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_LATITUDE;
-import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_LONGITUDE;
+import static ru.geekbrains.android3.weather1.presentation.main.GeoViewModel.INTENT_CITY_NAME;
+import static ru.geekbrains.android3.weather1.presentation.main.GeoViewModel.INTENT_LATITUDE;
+import static ru.geekbrains.android3.weather1.presentation.main.GeoViewModel.INTENT_LONGITUDE;
 
 public class WeatherDetailsActivity extends AppCompatActivity {
 
@@ -49,8 +49,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         wViewModel.weatherLiveData.observe(this, data -> wAdapter.setWeatherList(data));
     }
-
-
+    
     private void InitViewModel() {
         Api api = RetrofitInit.newApiInstance();
         WeatherRepository wRepository = new WeatherRepositoryImpl(api);
