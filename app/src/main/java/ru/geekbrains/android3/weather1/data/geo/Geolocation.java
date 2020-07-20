@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
+
 import androidx.core.app.ActivityCompat;
 
 import io.reactivex.subjects.PublishSubject;
@@ -21,7 +22,6 @@ public class Geolocation {
     private LocationManager locationManager;
     private String provider;
 
-//    PublishSubject<Location> geoSubject = PublishSubject.create();
     PublishSubject<Location> geoSubject;
 
     private static final int PERMISSION_REQUEST_CODE = 10;
@@ -82,7 +82,7 @@ public class Geolocation {
     // Запрос пермиссии для геолокации
     private void requestLocationPermissions() {
         if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.CALL_PHONE)) {
-            ActivityCompat.requestPermissions((Activity)context,
+            ActivityCompat.requestPermissions((Activity) context,
                     new String[]{
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_FINE_LOCATION
