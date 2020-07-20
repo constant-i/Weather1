@@ -54,8 +54,21 @@ public class MainActivity extends AppCompatActivity implements MainView {
         initViewModel();
 
 //        mainPresenter = new MainPresenterImpl(this);
-        
+
         initGui();
+
+        geoViewModel.latitude.observe(this, data -> {
+            textLatitude.setVisibility(View.VISIBLE);
+            textLatitude.setText(data);
+            btnLocalWeather.setEnabled(true);
+        });
+
+        geoViewModel.longitude.observe(this, data -> {
+            textLongitude.setVisibility(View.VISIBLE);
+            textLongitude.setText(data);
+            btnLocalWeather.setEnabled(true);
+        });
+
     }
 
     private void initGui() {

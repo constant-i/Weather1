@@ -15,14 +15,14 @@ public class WeatherViewModel extends ViewModel {
     private WeatherInteractor weatherInteractor;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public MutableLiveData<java.util.List<List>> weatherLiveData = new MutableLiveData<>();
-    public MutableLiveData<String> cityNameLiveData = new MutableLiveData<>();
+    MutableLiveData<java.util.List<List>> weatherLiveData = new MutableLiveData<>();
+    MutableLiveData<String> cityNameLiveData = new MutableLiveData<>();
 
-    public WeatherViewModel (WeatherInteractor wInteractor) {
+    WeatherViewModel(WeatherInteractor wInteractor) {
         weatherInteractor = wInteractor;
     }
 
-    public void getWeatherForCity(String city) {
+    void getWeatherForCity(String city) {
         compositeDisposable.add(
                 weatherInteractor.getWeaterForCity(city)
                 .subscribe(result -> weatherLiveData.postValue(result),

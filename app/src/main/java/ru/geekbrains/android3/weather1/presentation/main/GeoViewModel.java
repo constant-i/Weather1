@@ -3,6 +3,7 @@ package ru.geekbrains.android3.weather1.presentation.main;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,8 +19,8 @@ public class GeoViewModel extends ViewModel {
     private Context context;
     private Geolocation geolocation;
 
-    private String latitude;
-    private String longitude;
+    MutableLiveData<String> latitude = new MutableLiveData<>();
+    MutableLiveData<String> longitude = new MutableLiveData<>();
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -41,10 +42,8 @@ public class GeoViewModel extends ViewModel {
                 geolocation.getGeoSubject()
 //                        .doOnNext(location -> mainView.makeGeoBtnVisible())
                         .subscribe(location -> {
-                                    latitude = Double.toString(location.getLatitude());
-//                                    mainView.setLatitude(latitude);
-                                    longitude = Double.toString(location.getLongitude());
-//                                    mainView.setLongitude(longitude);
+                                    latitude.setValue(Double.toString(location.getLatitude()));
+                                    longitude.setValue(Double.toString(location.getLongitude()));
                                 },
                                 throweble -> System.out.println(throweble))
         );
