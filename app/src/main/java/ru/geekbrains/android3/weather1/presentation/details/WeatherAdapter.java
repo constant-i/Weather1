@@ -4,9 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -16,10 +18,6 @@ import ru.geekbrains.android3.weather1.data.model.List;
 
 public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHolder> {
     private java.util.List<List> WeatherList = new ArrayList<>();
-
-//    public WeatherAdapter(java.util.List<List> wList) {
-//        WeatherList = wList;
-//    }
 
     void setWeatherList(java.util.List<List> wList) {
         WeatherList.clear();
@@ -53,12 +51,12 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textTime;
-        public TextView textTemper;
-        public TextView textMainWeather;
+        TextView textTime;
+        TextView textTemper;
+        TextView textMainWeather;
         CardView ItemCommonWeather;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             textTime = v.findViewById(R.id.item_text_time);
             textTemper = v.findViewById(R.id.item_text_temper);
@@ -66,7 +64,8 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.ViewHold
             ItemCommonWeather = v.findViewById(R.id.item_common_weather);
             ItemCommonWeather.setOnClickListener(item -> {
                 item.getId();
-            });// TODO сюда добавить слушателей нажатий
+                // сюда добавить слушателей нажатий
+            });
         }
     }
 }

@@ -24,25 +24,25 @@ public class GeoViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public GeoViewModel(Context cont, Geolocation geo) {
+    GeoViewModel(Context cont, Geolocation geo) {
         context = cont;
         geolocation = geo;
     }
 
-    public void showWeatherForCity(String cityName) {
+    void showWeatherForCity(String cityName) {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
         intent.putExtra(INTENT_CITY_NAME, cityName);
         context.startActivity(intent);
     }
 
-    public void showWeatherByCoordinates() {
+    void showWeatherByCoordinates() {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
         intent.putExtra(INTENT_LATITUDE, latitude.getValue());
         intent.putExtra(INTENT_LONGITUDE, longitude.getValue());
         context.startActivity(intent);
     }
 
-    public void initCoordinate() {
+    void initCoordinate() {
         geolocation.initCoordinate();
 
         compositeDisposable.add(
@@ -55,12 +55,12 @@ public class GeoViewModel extends ViewModel {
         );
     }
 
-    public void stopCoordinate() {
+    void stopCoordinate() {
         geolocation.stopCoordinate();
         compositeDisposable.dispose();
     }
 
-    public void requestLocation() {
+    void requestLocation() {
         geolocation.requestLocation();
     }
 

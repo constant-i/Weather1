@@ -13,7 +13,7 @@ public class GeoViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     Context context;
     private Geolocation geolocation;
 
-    public GeoViewModelFactory (Context cont,Geolocation geo) {
+    GeoViewModelFactory(Context cont, Geolocation geo) {
         context = cont;
         geolocation = geo;
     }

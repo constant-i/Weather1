@@ -17,7 +17,7 @@ public class WeatherViewModelFactory extends ViewModelProvider.NewInstanceFactor
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if(modelClass == WeatherViewModel.class) {
+        if (modelClass == WeatherViewModel.class) {
             return (T) new WeatherViewModel(weatherInteractor);
         }
         return null;

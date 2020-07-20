@@ -3,12 +3,10 @@ package ru.geekbrains.android3.weather1.presentation.details;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-
 import io.reactivex.disposables.CompositeDisposable;
 import ru.geekbrains.android3.weather1.data.model.List;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 
-//public class WeatherViewModel extends ViewModel implements LifecycleObserver {
 public class WeatherViewModel extends ViewModel {
 
     private WeatherInteractor weatherInteractor;
@@ -48,5 +46,4 @@ public class WeatherViewModel extends ViewModel {
         compositeDisposable.clear();
         super.onCleared();
     }
-
 }

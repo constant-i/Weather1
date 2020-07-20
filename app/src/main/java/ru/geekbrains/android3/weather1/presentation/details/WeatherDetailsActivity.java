@@ -39,18 +39,15 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         if (getIntent().getStringExtra(INTENT_CITY_NAME) != null) {
             city = getIntent().getStringExtra(INTENT_CITY_NAME);
             wViewModel.getWeatherForCity(city);
-        } else if (getIntent().getStringExtra(INTENT_LATITUDE) != null &&
-                getIntent().getStringExtra(INTENT_LONGITUDE) != null) {
+        } else if (getIntent().getStringExtra(INTENT_LATITUDE) != null && getIntent().getStringExtra(INTENT_LONGITUDE) != null) {
             latitude = getIntent().getStringExtra(INTENT_LATITUDE);
             longitude = getIntent().getStringExtra(INTENT_LONGITUDE);
             wViewModel.getWeatherForCoordinates(latitude, longitude);
         }
 
-        wViewModel.cityNameLiveData.observe(this, data -> ((TextView)findViewById(R.id.city_name)).setText(data));
+        wViewModel.cityNameLiveData.observe(this, data -> ((TextView) findViewById(R.id.city_name)).setText(data));
 
-        wViewModel.weatherLiveData.observe(this, data -> {
-            wAdapter.setWeatherList(data);
-        });
+        wViewModel.weatherLiveData.observe(this, data -> wAdapter.setWeatherList(data));
     }
 
 
@@ -60,7 +57,6 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         WeatherInteractor wInteractor = new WeatherInteractor(wRepository);
 
         wViewModel = ViewModelProviders.of(this, new WeatherViewModelFactory(wInteractor)).get(WeatherViewModel.class);
-//        getLifecycle().addObserver(wViewModel);
     }
 
     private void initRecycleView() {
@@ -69,5 +65,4 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(wAdapter);
     }
-
 }
