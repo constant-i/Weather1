@@ -35,17 +35,23 @@ public class GeoViewModel extends ViewModel {
         context.startActivity(intent);
     }
 
+    public void showWeatherByCoordinates() {
+        Intent intent = new Intent(context, WeatherDetailsActivity.class);
+        intent.putExtra(INTENT_LATITUDE, latitude.getValue());
+        intent.putExtra(INTENT_LONGITUDE, longitude.getValue());
+        context.startActivity(intent);
+    }
+
     public void initCoordinate() {
         geolocation.initCoordinate();
 
         compositeDisposable.add(
                 geolocation.getGeoSubject()
-//                        .doOnNext(location -> mainView.makeGeoBtnVisible())
                         .subscribe(location -> {
                                     latitude.setValue(Double.toString(location.getLatitude()));
                                     longitude.setValue(Double.toString(location.getLongitude()));
                                 },
-                                throweble -> System.out.println(throweble))
+                                throwable -> System.out.println(throwable))
         );
     }
 

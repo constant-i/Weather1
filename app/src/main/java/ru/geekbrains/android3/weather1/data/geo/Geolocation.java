@@ -12,8 +12,6 @@ import android.os.Bundle;
 import android.util.Log;
 import androidx.core.app.ActivityCompat;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
 import io.reactivex.subjects.PublishSubject;
 
 import static android.content.Context.LOCATION_SERVICE;

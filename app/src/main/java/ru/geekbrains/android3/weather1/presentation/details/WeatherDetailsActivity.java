@@ -16,6 +16,8 @@ import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 
 import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_CITY_NAME;
+import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_LATITUDE;
+import static ru.geekbrains.android3.weather1.presentation.main.MainPresenterImpl.INTENT_LONGITUDE;
 
 public class WeatherDetailsActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class WeatherDetailsActivity extends AppCompatActivity {
     WeatherViewModel wViewModel;
 
     String city;
+    String latitude;
+    String longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +36,15 @@ public class WeatherDetailsActivity extends AppCompatActivity {
         InitViewModel();
         initRecycleView();
 
-        city = getIntent().getStringExtra(INTENT_CITY_NAME);
-        wViewModel.getWeatherForCity(city);
-        wViewModel.cityNameLiveData.postValue(city);
+        if (getIntent().getStringExtra(INTENT_CITY_NAME) != null) {
+            city = getIntent().getStringExtra(INTENT_CITY_NAME);
+            wViewModel.getWeatherForCity(city);
+        } else if (getIntent().getStringExtra(INTENT_LATITUDE) != null &&
+                getIntent().getStringExtra(INTENT_LONGITUDE) != null) {
+            latitude = getIntent().getStringExtra(INTENT_LATITUDE);
+            longitude = getIntent().getStringExtra(INTENT_LONGITUDE);
+            wViewModel.getWeatherForCoordinates(latitude, longitude);
+        }
 
         wViewModel.cityNameLiveData.observe(this, data -> ((TextView)findViewById(R.id.city_name)).setText(data));
 

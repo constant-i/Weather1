@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         initViewModel();
 
 //        mainPresenter = new MainPresenterImpl(this);
-
         initGui();
 
         geoViewModel.latitude.observe(this, data -> {
@@ -78,14 +77,26 @@ public class MainActivity extends AppCompatActivity implements MainView {
         btnGetWeather = findViewById(R.id.btn_get_weather);
         btnGetWeather.setOnClickListener(v -> {
             cityName = editCity.getText().toString();
-//            mainPresenter.showWeatherForCity(cityName);
             geoViewModel.showWeatherForCity(cityName);
         });
 
         btnLocalWeather = findViewById(R.id.btn_get_location_weather);
         btnLocalWeather.setOnClickListener(v -> {
-            // TODO
+            geoViewModel.showWeatherByCoordinates();
         });
+
+//        geoViewModel.latitude.observe(this, data -> {
+//            textLatitude.setVisibility(View.VISIBLE);
+//            textLatitude.setText(data);
+//            btnLocalWeather.setEnabled(true);
+//        });
+//
+//        geoViewModel.longitude.observe(this, data -> {
+//            textLongitude.setVisibility(View.VISIBLE);
+//            textLongitude.setText(data);
+//            btnLocalWeather.setEnabled(true);
+//        });
+
     }
 
     private void initViewModel() {

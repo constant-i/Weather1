@@ -1,6 +1,5 @@
 package ru.geekbrains.android3.weather1.presentation.details;
 
-import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -24,9 +23,23 @@ public class WeatherViewModel extends ViewModel {
 
     void getWeatherForCity(String city) {
         compositeDisposable.add(
-                weatherInteractor.getWeaterForCity(city)
-                .subscribe(result -> weatherLiveData.postValue(result),
-                throweble -> System.out.println(throweble))
+                weatherInteractor.getWeatherForCity(city)
+                        .subscribe(result -> {
+                                    weatherLiveData.postValue(result.getList());
+                                    cityNameLiveData.postValue(result.getCity().getName());
+                                },
+                                throwable -> System.out.println(throwable))
+        );
+    }
+
+    void getWeatherForCoordinates(String latitude, String longitude) {
+        compositeDisposable.add(
+                weatherInteractor.getWeatherByCoord(latitude, longitude)
+                        .subscribe(result -> {
+                                    weatherLiveData.postValue(result.getList());
+                                    cityNameLiveData.postValue(result.getCity().getName());
+                                },
+                                throwable -> System.out.println(throwable))
         );
     }
 
