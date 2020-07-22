@@ -1,4 +1,4 @@
-package ru.geekbrains.android3.weather1.presentation.details;
+package ru.geekbrains.android3.weather1.presentation.weather_details;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.CompositeDisposable;
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
-import ru.geekbrains.android3.weather1.presentation.details.WeatherDetailsActivity;
+import ru.geekbrains.android3.weather1.presentation.weather_details.WeatherDetailsActivity;
 
 public class GeoViewModel extends ViewModel {
 
