@@ -12,14 +12,9 @@ import javax.inject.Inject;
 
 import ru.geekbrains.android3.weather1.App;
 import ru.geekbrains.android3.weather1.R;
-import ru.geekbrains.android3.weather1.data.network.Api;
-import ru.geekbrains.android3.weather1.data.network.RetrofitInit;
-import ru.geekbrains.android3.weather1.data.repository.WeatherRepositoryImpl;
 import ru.geekbrains.android3.weather1.di.AppComponent;
-import ru.geekbrains.android3.weather1.di.DaggerWeatherDetailsComponent;
-import ru.geekbrains.android3.weather1.di.WeatherDetailsComponent;
-import ru.geekbrains.android3.weather1.di.WeatherDetailsModule;
-import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
+import ru.geekbrains.android3.weather1.di.WeatherDetails.DaggerWeatherDetailsComponent;
+import ru.geekbrains.android3.weather1.di.WeatherDetails.WeatherDetailsModule;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 
 import static ru.geekbrains.android3.weather1.presentation.main.GeoViewModel.INTENT_CITY_NAME;
@@ -28,11 +23,12 @@ import static ru.geekbrains.android3.weather1.presentation.main.GeoViewModel.INT
 
 public class WeatherDetailsActivity extends AppCompatActivity {
 
-    WeatherAdapter wAdapter;
     WeatherViewModel wViewModel;
 
     @Inject
     WeatherInteractor wInteractor;
+    @Inject
+    WeatherAdapter wAdapter;
 
     String city;
     String latitude;
@@ -73,7 +69,7 @@ public class WeatherDetailsActivity extends AppCompatActivity {
     }
 
     private void initRecycleView() {
-        wAdapter = new WeatherAdapter();
+        //wAdapter = new WeatherAdapter();
         RecyclerView rv = findViewById(R.id.weather_rec_view);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(wAdapter);

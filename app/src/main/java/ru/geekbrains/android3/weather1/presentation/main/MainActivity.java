@@ -36,18 +36,18 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
 
         initGui();
-
-        geoViewModel.latitude.observe(this, data -> {
-            textLatitude.setVisibility(View.VISIBLE);
-            textLatitude.setText(data);
-            btnLocalWeather.setEnabled(true);
-        });
-
-        geoViewModel.longitude.observe(this, data -> {
-            textLongitude.setVisibility(View.VISIBLE);
-            textLongitude.setText(data);
-            btnLocalWeather.setEnabled(true);
-        });
+//
+//        geoViewModel.latitude.observe(this, data -> {
+//            textLatitude.setVisibility(View.VISIBLE);
+//            textLatitude.setText(data);
+//            btnLocalWeather.setEnabled(true);
+//        });
+//
+//        geoViewModel.longitude.observe(this, data -> {
+//            textLongitude.setVisibility(View.VISIBLE);
+//            textLongitude.setText(data);
+//            btnLocalWeather.setEnabled(true);
+//        });
 
     }
 
@@ -66,17 +66,17 @@ public class MainActivity extends AppCompatActivity {
             geoViewModel.showWeatherByCoordinates();
         });
 
-//        geoViewModel.latitude.observe(this, data -> {
-//            textLatitude.setVisibility(View.VISIBLE);
-//            textLatitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
-//
-//        geoViewModel.longitude.observe(this, data -> {
-//            textLongitude.setVisibility(View.VISIBLE);
-//            textLongitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
+        geoViewModel.latitude.observe(this, data -> {
+            textLatitude.setVisibility(View.VISIBLE);
+            textLatitude.setText(data);
+            btnLocalWeather.setEnabled(true);
+        });
+
+        geoViewModel.longitude.observe(this, data -> {
+            textLongitude.setVisibility(View.VISIBLE);
+            textLongitude.setText(data);
+            btnLocalWeather.setEnabled(true);
+        });
 
     }
 

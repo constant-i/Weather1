@@ -5,7 +5,6 @@ import android.content.Context;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import ru.geekbrains.android3.weather1.data.network.Api;
 import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 
 @Component(modules = {
