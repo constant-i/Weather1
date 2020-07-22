@@ -8,10 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
+import ru.geekbrains.android3.weather1.App;
 import ru.geekbrains.android3.weather1.R;
 import ru.geekbrains.android3.weather1.data.network.Api;
 import ru.geekbrains.android3.weather1.data.network.RetrofitInit;
 import ru.geekbrains.android3.weather1.data.repository.WeatherRepositoryImpl;
+import ru.geekbrains.android3.weather1.di.AppComponent;
+import ru.geekbrains.android3.weather1.di.DaggerWeatherDetailsComponent;
+import ru.geekbrains.android3.weather1.di.WeatherDetailsComponent;
+import ru.geekbrains.android3.weather1.di.WeatherDetailsModule;
 import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 
@@ -23,6 +30,9 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
     WeatherAdapter wAdapter;
     WeatherViewModel wViewModel;
+
+    @Inject
+    WeatherInteractor wInteractor;
 
     String city;
     String latitude;
@@ -49,11 +59,15 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         wViewModel.weatherLiveData.observe(this, data -> wAdapter.setWeatherList(data));
     }
-    
+
     private void InitViewModel() {
-        Api api = RetrofitInit.newApiInstance();
-        WeatherRepository wRepository = new WeatherRepositoryImpl(api);
-        WeatherInteractor wInteractor = new WeatherInteractor(wRepository);
+        AppComponent appComponent = ((App) getApplication()).getAppComponent();
+
+        DaggerWeatherDetailsComponent.builder()
+                .weatherDetailsModule(new WeatherDetailsModule())
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
 
         wViewModel = ViewModelProviders.of(this, new WeatherViewModelFactory(wInteractor)).get(WeatherViewModel.class);
     }
