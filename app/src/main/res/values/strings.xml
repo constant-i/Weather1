@@ -28,4 +28,6 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="celsius_degree"> °C</string>
+    <string name="lon">Lon:  </string>
+    <string name="lat">Lat:  </string>
 </resources>

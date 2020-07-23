@@ -61,13 +61,13 @@ public class MainActivity extends AppCompatActivity {
             geoViewModel.showWeatherByCoordinates();
         });
 
-        geoViewModel.latitude.observe(this, data -> {
+        geoViewModel.latitude_view.observe(this, data -> {
             textLatitude.setVisibility(View.VISIBLE);
             textLatitude.setText(data);
             btnLocalWeather.setEnabled(true);
         });
 
-        geoViewModel.longitude.observe(this, data -> {
+        geoViewModel.longitude_view.observe(this, data -> {
             textLongitude.setVisibility(View.VISIBLE);
             textLongitude.setText(data);
             btnLocalWeather.setEnabled(true);

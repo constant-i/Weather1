@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.CompositeDisposable;
+import ru.geekbrains.android3.weather1.R;
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
 import ru.geekbrains.android3.weather1.presentation.weather_details.WeatherDetailsActivity;
 
@@ -19,8 +20,11 @@ public class GeoViewModel extends ViewModel {
     private Context context;
     private Geolocation geolocation;
 
-    MutableLiveData<String> latitude = new MutableLiveData<>();
-    MutableLiveData<String> longitude = new MutableLiveData<>();
+    MutableLiveData<String> latitude_view = new MutableLiveData<>();
+    MutableLiveData<String> longitude_view = new MutableLiveData<>();
+    String latitude;
+    String longitude;
+
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -37,8 +41,8 @@ public class GeoViewModel extends ViewModel {
 
     void showWeatherByCoordinates() {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
-        intent.putExtra(INTENT_LATITUDE, latitude.getValue());
-        intent.putExtra(INTENT_LONGITUDE, longitude.getValue());
+        intent.putExtra(INTENT_LATITUDE, latitude);
+        intent.putExtra(INTENT_LONGITUDE, longitude);
         context.startActivity(intent);
     }
 
@@ -48,10 +52,14 @@ public class GeoViewModel extends ViewModel {
         compositeDisposable.add(
                 geolocation.getGeoSubject()
                         .subscribe(location -> {
-                                    latitude.setValue(Double.toString(location.getLatitude()));
-                                    longitude.setValue(Double.toString(location.getLongitude()));
+                                    latitude = Double.toString(location.getLatitude());
+                                    longitude = Double.toString(location.getLongitude());
+                                    latitude_view.setValue(context.getString(R.string.lat)
+                                            + latitude.substring(0, 12));
+                                    longitude_view.setValue(context.getString(R.string.lon)
+                                            + longitude.substring(0, 12));
                                 },
-                                throwable -> System.out.println(throwable))
+                                System.out::println)
         );
     }
 
