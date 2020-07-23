@@ -1,5 +1,7 @@
 package ru.geekbrains.android3.weather1.di.WeatherDetails;
 
+import android.content.Context;
+
 import dagger.Component;
 import ru.geekbrains.android3.weather1.di.ActivityScope;
 import ru.geekbrains.android3.weather1.di.AppComponent;
@@ -14,11 +16,10 @@ import ru.geekbrains.android3.weather1.presentation.weather_details.WeatherDetai
 @ActivityScope
 public interface WeatherDetailsComponent {
 
-    WeatherInteractor getWeatherInteractor();
-
-    WeatherRepository getWeatherRepository();
-
-    WeatherAdapter getWeatherAdapter();
+//    WeatherInteractor getWeatherInteractor();
+//    WeatherRepository getWeatherRepository();
+//    WeatherAdapter getWeatherAdapter();
+//    Context getContext(); // можно получить, т.к. AppComponent предоставляет Context
 
     void inject(WeatherDetailsActivity activity);
 }

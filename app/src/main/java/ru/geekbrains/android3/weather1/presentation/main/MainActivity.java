@@ -12,8 +12,14 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import javax.inject.Inject;
+
+import ru.geekbrains.android3.weather1.App;
 import ru.geekbrains.android3.weather1.R;
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
+import ru.geekbrains.android3.weather1.di.AppComponent;
+import ru.geekbrains.android3.weather1.di.MainActivity.DaggerGeolocationComponent;
+import ru.geekbrains.android3.weather1.di.MainActivity.GeolocationModule;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnGetWeather;
     private Button btnLocalWeather;
     private String cityName;
+
+    @Inject
+    Geolocation geolocation;
 
     private GeoViewModel geoViewModel;
 
@@ -34,21 +43,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViewModel();
-
         initGui();
-//
-//        geoViewModel.latitude.observe(this, data -> {
-//            textLatitude.setVisibility(View.VISIBLE);
-//            textLatitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
-//
-//        geoViewModel.longitude.observe(this, data -> {
-//            textLongitude.setVisibility(View.VISIBLE);
-//            textLongitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
-
     }
 
     private void initGui() {
@@ -81,7 +76,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViewModel() {
-        Geolocation geolocation = new Geolocation(this);
+//        Geolocation geolocation = new Geolocation(this);
+        AppComponent appComponent = ((App) getApplication()).getAppComponent();
+        DaggerGeolocationComponent.builder()
+                .geolocationModule(new GeolocationModule())
+                .appComponent(appComponent)
+                .build()
+                .inject(this);
+
         geoViewModel = ViewModelProviders.of(this, new GeoViewModelFactory(this, geolocation)).get(GeoViewModel.class);
     }
 
