@@ -19,8 +19,10 @@ public class GeoViewModel extends ViewModel {
     private Context context;
     private Geolocation geolocation;
 
-    MutableLiveData<String> latitude = new MutableLiveData<>();
-    MutableLiveData<String> longitude = new MutableLiveData<>();
+    MutableLiveData<String> ld_latitude = new MutableLiveData<>();
+    MutableLiveData<String> ld_longitude = new MutableLiveData<>();
+    private String latitude;
+    private String longitude;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -37,8 +39,8 @@ public class GeoViewModel extends ViewModel {
 
     void showWeatherByCoordinates() {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
-        intent.putExtra(INTENT_LATITUDE, latitude.getValue());
-        intent.putExtra(INTENT_LONGITUDE, longitude.getValue());
+        intent.putExtra(INTENT_LATITUDE, latitude);
+        intent.putExtra(INTENT_LONGITUDE, longitude);
         context.startActivity(intent);
     }
 
@@ -48,8 +50,10 @@ public class GeoViewModel extends ViewModel {
         compositeDisposable.add(
                 geolocation.getGeoSubject()
                         .subscribe(location -> {
-                                    latitude.setValue(Double.toString(location.getLatitude()));
-                                    longitude.setValue(Double.toString(location.getLongitude()));
+                                    latitude = Double.toString(location.getLatitude());
+                                    longitude = Double.toString(location.getLongitude());
+                                    ld_latitude.setValue("Lat: " + latitude.substring(0, 10));
+                                    ld_longitude.setValue("Lon: " + longitude.substring(0, 10));
                                 },
                                 throwable -> System.out.println(throwable))
         );

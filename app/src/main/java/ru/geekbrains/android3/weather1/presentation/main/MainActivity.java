@@ -34,21 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initViewModel();
-
         initGui();
-//
-//        geoViewModel.latitude.observe(this, data -> {
-//            textLatitude.setVisibility(View.VISIBLE);
-//            textLatitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
-//
-//        geoViewModel.longitude.observe(this, data -> {
-//            textLongitude.setVisibility(View.VISIBLE);
-//            textLongitude.setText(data);
-//            btnLocalWeather.setEnabled(true);
-//        });
-
     }
 
     private void initGui() {
@@ -66,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
             geoViewModel.showWeatherByCoordinates();
         });
 
-        geoViewModel.latitude.observe(this, data -> {
+        geoViewModel.ld_latitude.observe(this, data -> {
             textLatitude.setVisibility(View.VISIBLE);
             textLatitude.setText(data);
             btnLocalWeather.setEnabled(true);
         });
 
-        geoViewModel.longitude.observe(this, data -> {
+        geoViewModel.ld_longitude.observe(this, data -> {
             textLongitude.setVisibility(View.VISIBLE);
             textLongitude.setText(data);
             btnLocalWeather.setEnabled(true);
