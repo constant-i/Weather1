@@ -44,7 +44,8 @@ public class WeatherDetailsActivity extends AppCompatActivity {
 
         if (getIntent().getStringExtra(INTENT_CITY_NAME) != null) {
             city = getIntent().getStringExtra(INTENT_CITY_NAME);
-            wViewModel.getWeatherForCity(city);
+//            wViewModel.getWeatherForCity(city);
+            wViewModel.getWeatherFor14Days(city);
         } else if (getIntent().getStringExtra(INTENT_LATITUDE) != null && getIntent().getStringExtra(INTENT_LONGITUDE) != null) {
             latitude = getIntent().getStringExtra(INTENT_LATITUDE);
             longitude = getIntent().getStringExtra(INTENT_LONGITUDE);

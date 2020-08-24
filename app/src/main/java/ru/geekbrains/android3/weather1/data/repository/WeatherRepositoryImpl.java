@@ -2,6 +2,7 @@ package ru.geekbrains.android3.weather1.data.repository;
 
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
+import ru.geekbrains.android3.weather1.data.model.ResponseClasses;
 import ru.geekbrains.android3.weather1.data.model.WeatherResponse5DayModel;
 import ru.geekbrains.android3.weather1.data.network.Api;
 import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
@@ -27,4 +28,12 @@ public class WeatherRepositoryImpl implements WeatherRepository {
                 .subscribeOn(Schedulers.io())
                 .map(response -> response);
     }
+
+    @Override
+    public Single<ResponseClasses.ForecastResult> loadWeatherFor14Days(String cityCountry) {
+        return api.loadWeatherFor14Days(cityCountry)
+                .subscribeOn(Schedulers.io())
+                .map(response -> response);
+    }
+
 }
