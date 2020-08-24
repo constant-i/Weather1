@@ -41,7 +41,7 @@ public class Geolocation {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             requestLocation();              // запросим координаты
-            //Log.d("MyTAG", "requestLocation()");
+//            Log.d("MyTAG", "requestLocation()");
         } else {
             requestLocationPermissions();   // пермиссии нет, будем запрашивать у пользователя
         }
@@ -54,7 +54,7 @@ public class Geolocation {
         provider = locationManager.getBestProvider(criteria, true);
         if (provider != null) {
             locationManager.requestLocationUpdates(provider, 10000, 10, listener);//получать геоположение через каждые 10 секунд или каждые 10 метров
-            //Log.d("MyTAG", "inside requestLocation()");
+            Log.d("MyTAG", "inside requestLocation()");
         }
     }
 
@@ -93,5 +93,6 @@ public class Geolocation {
 
     public void stopCoordinate() {
         locationManager.removeUpdates(listener);
+        Log.d("MyTAG", "stopCoordinate()");
     }
 }

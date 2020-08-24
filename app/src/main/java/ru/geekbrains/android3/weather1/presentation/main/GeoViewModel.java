@@ -2,6 +2,7 @@ package ru.geekbrains.android3.weather1.presentation.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -46,10 +47,11 @@ public class GeoViewModel extends ViewModel {
 
     void initCoordinate() {
         geolocation.initCoordinate();
-
+        Log.d("MyTAG", "vm initCoordinate(), compositeDisposable.add");
         compositeDisposable.add(
                 geolocation.getGeoSubject()
                         .subscribe(location -> {
+                                    Log.d("MyTAG", "Get Coordinate");
                                     latitude = Double.toString(location.getLatitude());
                                     longitude = Double.toString(location.getLongitude());
                                     ld_latitude.setValue("Lat: " + latitude.substring(0, 10));
@@ -61,7 +63,13 @@ public class GeoViewModel extends ViewModel {
 
     void stopCoordinate() {
         geolocation.stopCoordinate();
+//        compositeDisposable.dispose();
+        Log.d("MyTAG", "vm stopCoordinate()");
+    }
+
+    void disposeGeoSubject() {
         compositeDisposable.dispose();
+        Log.d("MyTAG", "vm disposeGeoSubject()");
     }
 
     void requestLocation() {

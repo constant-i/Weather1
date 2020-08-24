@@ -6,11 +6,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 import ru.geekbrains.android3.weather1.R;
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
@@ -33,8 +37,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initViewModel();
         initGui();
+        geoViewModel.initCoordinate();
+        Log.d("MyTAG", "onResume() initCoordinate()");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        geoViewModel.stopCoordinate();
+        Log.d("MyTAG", "onPause() stopCoordinate();");
     }
 
     private void initGui() {
@@ -74,15 +92,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        geoViewModel.initCoordinate();
+//        initViewModel();
+//        initGui();
+//        geoViewModel.initCoordinate();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        geoViewModel.stopCoordinate();
+//        geoViewModel.stopCoordinate();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        geoViewModel.stopCoordinate();
+        geoViewModel.disposeGeoSubject();
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
