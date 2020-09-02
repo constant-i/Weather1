@@ -18,6 +18,4 @@ public interface AppComponent {
     WeatherRepository getWeatherRepository();
 
     Context getContext();
-
-
 }

@@ -1,4 +1,4 @@
-package ru.geekbrains.android3.weather1.di.WeatherDetails;
+package ru.geekbrains.android3.weather1.di.weather_details;
 
 import dagger.Module;
 import dagger.Provides;

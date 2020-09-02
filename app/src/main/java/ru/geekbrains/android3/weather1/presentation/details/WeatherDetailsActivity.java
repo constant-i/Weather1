@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import javax.inject.Inject;
 
 import ru.geekbrains.android3.weather1.App;
-import ru.geekbrains.android3.weather1.di.WeatherDetails.DaggerWeatherDetailsComponent;
-import ru.geekbrains.android3.weather1.di.WeatherDetails.WeatherDetailsModule;
+import ru.geekbrains.android3.weather1.di.weather_details.DaggerWeatherDetailsComponent;
+import ru.geekbrains.android3.weather1.di.weather_details.WeatherDetailsModule;
 import ru.geekbrains.android3.weather1.domain.usecase.WeatherInteractor;
 import ru.geekbrains.android3.weather1.R;
 
