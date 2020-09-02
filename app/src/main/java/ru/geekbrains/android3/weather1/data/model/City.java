@@ -7,28 +7,29 @@ public class City {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private Long id;
+
     @SerializedName("name")
     @Expose
     private String name;
+
     @SerializedName("coord")
     @Expose
-    private Coord coord;
+    private Coordinates coord;
+
     @SerializedName("country")
     @Expose
     private String country;
+
     @SerializedName("population")
     @Expose
     private Integer population;
-    @SerializedName("timezone")
-    @Expose
-    private Integer timezone;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -40,11 +41,11 @@ public class City {
         this.name = name;
     }
 
-    public Coord getCoord() {
+    public Coordinates getCoord() {
         return coord;
     }
 
-    public void setCoord(Coord coord) {
+    public void setCoord(Coordinates coord) {
         this.coord = coord;
     }
 
@@ -63,13 +64,4 @@ public class City {
     public void setPopulation(Integer population) {
         this.population = population;
     }
-
-    public Integer getTimezone() {
-        return timezone;
-    }
-
-    public void setTimezone(Integer timezone) {
-        this.timezone = timezone;
-    }
-
 }

@@ -4,7 +4,7 @@ import io.reactivex.Single;
 
 public interface WeatherRepository {
 
-    Single getWeather5Days(String cityCountry);
+    Single getWeatherFor14Days(String city);
 
-    Single getWeatherByCoord5Days(String latitude, String longitude);
+    Single getWeatherByCoordinates(String latitude, String longitude);
 }

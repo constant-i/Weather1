@@ -1,4 +1,4 @@
-package ru.geekbrains.android3.weather1.presentation.weather_details;
+package ru.geekbrains.android3.weather1.presentation.details;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -10,8 +10,8 @@ public class WeatherViewModelFactory extends ViewModelProvider.NewInstanceFactor
 
     private WeatherInteractor weatherInteractor;
 
-    public WeatherViewModelFactory(WeatherInteractor wInteractor) {
-        weatherInteractor = wInteractor;
+    public WeatherViewModelFactory(WeatherInteractor weatherInteractor) {
+        this.weatherInteractor = weatherInteractor;
     }
 
     @NonNull

@@ -1,7 +1,7 @@
 package ru.geekbrains.android3.weather1.domain.usecase;
 
 import io.reactivex.Single;
-import ru.geekbrains.android3.weather1.data.model.WeatherResponse5DayModel;
+import ru.geekbrains.android3.weather1.domain.model.ForecastList;
 import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 
 public class WeatherInteractor {
@@ -12,12 +12,11 @@ public class WeatherInteractor {
         weatherRepository = repository;
     }
 
-    public Single<WeatherResponse5DayModel> getWeatherForCity(String city) {
-        return weatherRepository.getWeather5Days(city);
+    public Single<ForecastList> getWeatherFor14Days (String city) {
+        return weatherRepository.getWeatherFor14Days(city);
     }
 
-    public Single<WeatherResponse5DayModel> getWeatherByCoord(String latitude, String longitude) {
-        return weatherRepository.getWeatherByCoord5Days(latitude, longitude);
+    public Single<ForecastList> getWeatherByCoord (String latitude, String longitude) {
+        return weatherRepository.getWeatherByCoordinates(latitude, longitude);
     }
-
 }

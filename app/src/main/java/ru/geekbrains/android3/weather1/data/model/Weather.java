@@ -3,28 +3,23 @@ package ru.geekbrains.android3.weather1.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-//"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04n"}]
 public class Weather {
+
     @SerializedName("id")
     @Expose
-    private int id;
+    private Long id;
+
     @SerializedName("main")
     @Expose
     private String main;
+
     @SerializedName("description")
     @Expose
     private String description;
+
     @SerializedName("icon")
     @Expose
     private String icon;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getMain() {
         return main;
@@ -48,5 +43,13 @@ public class Weather {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

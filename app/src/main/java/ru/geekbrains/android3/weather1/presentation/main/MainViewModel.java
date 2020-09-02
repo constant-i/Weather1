@@ -2,54 +2,59 @@ package ru.geekbrains.android3.weather1.presentation.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import io.reactivex.disposables.CompositeDisposable;
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
-import ru.geekbrains.android3.weather1.presentation.weather_details.WeatherDetailsActivity;
+import ru.geekbrains.android3.weather1.presentation.details.WeatherDetailsActivity;
 
-public class GeoViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
     public static final String INTENT_CITY_NAME = "CityName";
     public static final String INTENT_LATITUDE = "Latitude";
     public static final String INTENT_LONGITUDE = "Longitude";
+//    public static final String LAT_MAMONTOVKA = "56.0"
+//    public static final String LON_MAMONTOVKA = "37.82"
 
-    private Context context;
     private Geolocation geolocation;
 
-    MutableLiveData<String> latitude = new MutableLiveData<>();
-    MutableLiveData<String> longitude = new MutableLiveData<>();
+    MutableLiveData<String> liveDataLatitude = new MutableLiveData<>();
+    MutableLiveData<String> liveDataLongitude = new MutableLiveData<>();
+    private String latitude;
+    private String longitude;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    GeoViewModel(Context cont, Geolocation geo) {
-        context = cont;
-        geolocation = geo;
+    MainViewModel(Geolocation geolocation) {
+        this.geolocation = geolocation;
     }
 
-    void showWeatherForCity(String cityName) {
+    void showWeatherForCity(Context context, String cityName) {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
         intent.putExtra(INTENT_CITY_NAME, cityName);
         context.startActivity(intent);
     }
 
-    void showWeatherByCoordinates() {
+    void showWeatherByCoord(Context context) {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
-        intent.putExtra(INTENT_LATITUDE, latitude.getValue());
-        intent.putExtra(INTENT_LONGITUDE, longitude.getValue());
+        intent.putExtra(INTENT_LATITUDE, latitude);
+        intent.putExtra(INTENT_LONGITUDE, longitude);
         context.startActivity(intent);
     }
 
     void initCoordinate() {
         geolocation.initCoordinate();
-
         compositeDisposable.add(
                 geolocation.getGeoSubject()
                         .subscribe(location -> {
-                                    latitude.setValue(Double.toString(location.getLatitude()));
-                                    longitude.setValue(Double.toString(location.getLongitude()));
+                                    Log.d("MyTAG", "Get Coordinate");
+                                    latitude = Double.toString(location.getLatitude());
+                                    longitude = Double.toString(location.getLongitude());
+                                    liveDataLatitude.postValue("Lat: " + latitude.substring(0, 10));
+                                    liveDataLongitude.postValue("Lon: " + longitude.substring(0, 10));
                                 },
                                 throwable -> System.out.println(throwable))
         );
@@ -57,7 +62,10 @@ public class GeoViewModel extends ViewModel {
 
     void stopCoordinate() {
         geolocation.stopCoordinate();
-        compositeDisposable.dispose();
+    }
+
+    void disposeGeoSubject() {
+        compositeDisposable.clear();
     }
 
     void requestLocation() {

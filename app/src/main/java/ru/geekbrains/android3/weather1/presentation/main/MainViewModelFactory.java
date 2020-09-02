@@ -8,21 +8,21 @@ import androidx.lifecycle.ViewModelProvider;
 
 import ru.geekbrains.android3.weather1.data.geo.Geolocation;
 
-public class GeoViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+public class MainViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    Context context;
     private Geolocation geolocation;
+    Context context;
 
-    GeoViewModelFactory(Context cont, Geolocation geo) {
-        context = cont;
-        geolocation = geo;
+    MainViewModelFactory(Context context, Geolocation geolocation) {
+        this.context = context;
+        this.geolocation = geolocation;
     }
 
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if (modelClass == GeoViewModel.class) {
-            return (T) new GeoViewModel(context ,geolocation);
+        if (modelClass == MainViewModel.class) {
+            return (T) new MainViewModel(geolocation);
         }
         return null;
     }
