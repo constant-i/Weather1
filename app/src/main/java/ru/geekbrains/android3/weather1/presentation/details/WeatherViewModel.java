@@ -54,7 +54,6 @@ public class WeatherViewModel extends ViewModel {
     @Override
     protected void onCleared() {
         compositeDisposable.clear();
-//        compositeDisposable.dispose(); // TODO dispose или clear
         super.onCleared();
     }
 }
