@@ -12,12 +12,8 @@ import ru.geekbrains.android3.weather1.presentation.details.WeatherDetailsActivi
 )
 @WeatherDetailsScope
 public interface WeatherDetailsComponent {
-
-    WeatherInteractor getWeatherInteractor();
-
-    WeatherRepository getWeatherRepository();
-
-    WeatherAdapter getWeatherAdapter();
-
+//    WeatherInteractor getWeatherInteractor();
+//    WeatherRepository getWeatherRepository();
+//    WeatherAdapter getWeatherAdapter();
     void inject(WeatherDetailsActivity activity);
 }

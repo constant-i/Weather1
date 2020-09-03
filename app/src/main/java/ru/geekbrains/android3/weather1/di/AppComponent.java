@@ -14,8 +14,6 @@ import ru.geekbrains.android3.weather1.domain.repository.WeatherRepository;
 })
 @Singleton
 public interface AppComponent {
-
     WeatherRepository getWeatherRepository();
-
     Context getContext();
 }

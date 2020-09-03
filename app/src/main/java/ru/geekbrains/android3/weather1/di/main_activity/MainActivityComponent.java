@@ -10,6 +10,6 @@ import ru.geekbrains.android3.weather1.presentation.main.MainActivity;
         dependencies = {AppComponent.class})
 @MainActivityScope
 public interface MainActivityComponent {
-    Geolocation getGeolocation();
+//    Geolocation getGeolocation();
     void inject(MainActivity activity);
 }
