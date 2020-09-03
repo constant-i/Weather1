@@ -50,7 +50,6 @@ public class MainViewModel extends ViewModel {
         compositeDisposable.add(
                 geolocation.getGeoSubject()
                         .subscribe(location -> {
-                                    Log.d("MyTAG", "Get Coordinate");
                                     latitude = Double.toString(location.getLatitude());
                                     longitude = Double.toString(location.getLongitude());
                                     liveDataLatitude.postValue("Lat: " + latitude.substring(0, 10));

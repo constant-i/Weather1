@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 
@@ -24,7 +23,7 @@ public class Geolocation {
 
     PublishSubject<Location> geoSubject;
 
-    private static final int PERMISSION_REQUEST_CODE = 10;
+    public static final int PERMISSION_REQUEST_CODE = 10;
 
     Context context;
 
@@ -40,10 +39,9 @@ public class Geolocation {
     public void initCoordinate() {
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            requestLocation();              // запросим координаты
-            //Log.d("MyTAG", "requestLocation()");
+            requestLocation();
         } else {
-            requestLocationPermissions();   // пермиссии нет, будем запрашивать у пользователя
+            requestLocationPermissions();
         }
     }
 
@@ -54,7 +52,6 @@ public class Geolocation {
         provider = locationManager.getBestProvider(criteria, true);
         if (provider != null) {
             locationManager.requestLocationUpdates(provider, 10000, 10, listener);//получать геоположение через каждые 10 секунд или каждые 10 метров
-            //Log.d("MyTAG", "inside requestLocation()");
         }
     }
 
@@ -62,7 +59,6 @@ public class Geolocation {
     private LocationListener listener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
-            Log.d("MyTAG", "inside onLocationChanged");
             geoSubject.onNext(location);
         }
 
@@ -79,7 +75,6 @@ public class Geolocation {
         }
     };
 
-    // Запрос пермиссии для геолокации
     private void requestLocationPermissions() {
         if (!ActivityCompat.shouldShowRequestPermissionRationale((Activity) context, Manifest.permission.CALL_PHONE)) {
             ActivityCompat.requestPermissions((Activity) context,
