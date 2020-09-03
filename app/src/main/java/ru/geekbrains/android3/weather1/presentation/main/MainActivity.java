@@ -21,7 +21,11 @@ import ru.geekbrains.android3.weather1.R;
 import ru.geekbrains.android3.weather1.di.main_activity.DaggerMainActivityComponent;
 import ru.geekbrains.android3.weather1.di.main_activity.MainActivityModule;
 
+import static ru.geekbrains.android3.weather1.data.geo.Geolocation.PERMISSION_REQUEST_CODE;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String MOSCOW = "Moscow";
 
     private TextInputEditText editCity;
     private TextView textLatitude;
@@ -31,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     private String cityName;
 
     private MainViewModel mainViewModel;
-
-    private static final int PERMISSION_REQUEST_CODE = 10;
 
     @Inject
     Geolocation geolocation;
@@ -50,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         initViewModel();
         initGui();
         mainViewModel.initCoordinate();
-        Log.d("MyTAG", "onResume() initCoordinate()");
     }
 
     @Override
@@ -58,13 +59,12 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         mainViewModel.stopCoordinate();
         mainViewModel.disposeGeoSubject();
-        Log.d("MyTAG", "onPause() stopCoordinate(); clear();");
     }
 
     private void injectMainActivityDependencies() {
         DaggerMainActivityComponent.builder()
                 .mainActivityModule(new MainActivityModule())
-                .appComponent(((App)getApplication()).getAppComponent())
+                .appComponent(((App) getApplication()).getAppComponent())
                 .build()
                 .inject(this);
     }
@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnGetWeather = findViewById(R.id.btn_get_weather);
         btnGetWeather.setOnClickListener(v -> {
-            cityName = editCity.getText().toString();
+            if (editCity.getText().toString().equals("")) cityName = MOSCOW;
+            else cityName = editCity.getText().toString();
             mainViewModel.showWeatherForCity(this, cityName);
         });
 
