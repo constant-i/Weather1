@@ -1,5 +1,7 @@
 package ru.geekbrains.android3.weather1.presentation.details;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -29,7 +31,12 @@ public class WeatherViewModel extends ViewModel {
                                     cityNameLiveData.postValue(forecastList.getCity() + ", " + forecastList.getCountry());
                                     forecastLiveData.postValue(forecastList.getDailyForecast());
                                 },
-                                System.out::println)
+                                throwable -> {
+                                    if (throwable.getMessage().contains("404"))
+                                        cityNameLiveData.postValue("city not found: " + city);
+                                    else
+                                        cityNameLiveData.postValue(throwable.getMessage());
+                                })
         );
     }
 
