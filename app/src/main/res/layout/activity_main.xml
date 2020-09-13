@@ -15,18 +15,19 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/picture"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:contentDescription="TODO"
-                android:src="@drawable/ic_sunny"
+            <ru.geekbrains.android3.weather1.presentation.custom_view.CustomView
+                android:id="@+id/custom_view"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 app:layout_constraintBottom_toTopOf="@id/textInputCity"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:foregroundGravity="center"
+                app:custom_color="@color/yellow_sun"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:elevation="20dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputCity"
